@@ -2,6 +2,9 @@ from numba import njit
 
 import minitorch
 import minitorch.fast_ops
+# PYTHONPATH="/Users/carterhe/Desktop/MLE Codes/workspace/mod3-CarterHe479" python project/parallel_check.py
+# PYTHONPATH="." python project/parallel_check.py
+
 
 # MAP
 print("MAP")

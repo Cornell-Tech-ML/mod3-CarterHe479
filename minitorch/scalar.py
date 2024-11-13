@@ -7,19 +7,10 @@ import numpy as np
 
 from dataclasses import field
 from .autodiff import Context, Variable, backpropagate, central_difference
-from .scalar_functions import (
-    EQ,
-    LT,
-    Add,
-    Exp,
-    Inv,
-    Log,
-    Mul,
-    Neg,
-    ReLU,
-    ScalarFunction,
-    Sigmoid,
-)
+from .scalar_functions import Eq, Inv, Mul, Add, Log, Neg, Sigmoid, Relu, Exp, Lt
+
+# from .autodiff import ScalarFunction ???
+from .scalar_functions import ScalarFunction
 
 ScalarLike = Union[float, int, "Scalar"]
 
@@ -102,6 +93,7 @@ class Scalar:
             x: value to be accumulated
 
         """
+        print(f"Accumulating derivative {x} at Scalar with data {self.data}")
         assert self.is_leaf(), "Only leaf variables can have derivatives."
         if self.derivative is None:
             self.__setattr__("derivative", 0.0)
@@ -111,22 +103,55 @@ class Scalar:
         """True if this variable created by the user (no `last_fn`)"""
         return self.history is not None and self.history.last_fn is None
 
-    def is_constant(self) -> bool:
+    def is_constant(self) -> bool:  # noqa: D102
         return self.history is None
 
     @property
-    def parents(self) -> Iterable[Variable]:
-        """Get the variables used to create this one."""
+    def parents(self) -> Iterable[Variable]:  # noqa: D102
         assert self.history is not None
         return self.history.inputs
 
     def chain_rule(self, d_output: Any) -> Iterable[Tuple[Variable, Any]]:
+        """Computes the chain rule for backpropagation.
+
+        Args:
+        ----
+            d_output: The derivative of the output with respect to this variable.
+
+        Returns:
+        -------
+            An iterable of tuples, each containing a variable and its corresponding local gradient.
+
+        """
         h = self.history
         assert h is not None
         assert h.last_fn is not None
         assert h.ctx is not None
 
-        raise NotImplementedError("Need to include this file from past assignment.")
+        # TODO: Implement for Task 1.3.
+
+        # Retrieve the saved inputs from the forward pass
+        # inputs = h.inputs
+
+        # Compute the local gradients using the backward method of the last function
+
+        # local_grads = h.last_fn()._backward(h.ctx, d_output)
+
+        # If the function has multiple inputs, backward will return a tuple of gradients
+        # if not isinstance(local_grads, tuple):
+        #    local_grads = (local_grads,)
+
+        # Pair each input with its corresponding local gradient
+        # Filter out constants that do not need gradients
+        # result = []
+        # for inp, local_grad in zip(inputs, local_grads):
+        #    if not inp.is_constant():  # Skip constants
+        #        result.append((inp, local_grad))
+
+        # return result
+
+        x = h.last_fn._backward(h.ctx, d_output)
+        return zip(h.inputs, x)
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """Calls autodiff to fill in the derivatives for the history of this object.
@@ -141,10 +166,53 @@ class Scalar:
             d_output = 1.0
         backpropagate(self, d_output)
 
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 1.2.
+    # Subtraction
+    def __sub__(self, b: ScalarLike) -> Scalar:
+        return Add.apply(self, Neg.apply(b))
+
+    # Negation
+    def __neg__(self) -> Scalar:
+        return Neg.apply(self)
+
+    # Less than
+    def __lt__(self, b: ScalarLike) -> Scalar:
+        return Lt.apply(self, b)
+
+    # equal to
+    def __eq__(self, b: ScalarLike) -> Scalar:
+        return Eq.apply(self, b)
+
+    # Greater than
+    def __gt__(self, b: ScalarLike) -> Scalar:
+        return Lt.apply(b, self)
+
+    # Addition
+    def __add__(self, b: ScalarLike) -> Scalar:
+        return Add.apply(self, b)
+
+    # Log
+    def log(self) -> Scalar:
+        """Compute the natural logarithm of the scalar."""
+        return Log.apply(self)
+
+    # Exponential
+    def exp(self) -> Scalar:
+        """Compute the exponential of the scalar."""
+        return Exp.apply(self)
+
+    # Sigmoid
+    def sigmoid(self) -> Scalar:
+        """Compute the sigmoid of the scalar."""
+        return Sigmoid.apply(self)
+
+    # ReLU
+    def relu(self) -> Scalar:
+        """Compute the ReLU of the scalar."""
+        return Relu.apply(self)
 
 
-def derivative_check(f: Any, *scalars: Scalar) -> None:
+def derivative_check(f: Any, *scalars: Scalar) -> None:  # noqa: D417
     """Checks that autodiff works on a python function.
     Asserts False if derivative is incorrect.
 
