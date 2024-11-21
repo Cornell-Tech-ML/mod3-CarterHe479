@@ -1,12 +1,21 @@
 import random
 import time  # Import for timing
-import numba
+import matplotlib.pyplot as plt
 import minitorch
 
 datasets = minitorch.datasets
 FastTensorBackend = minitorch.TensorBackend(minitorch.FastOps)
-if numba.cuda.is_available():
-    GPUBackend = minitorch.TensorBackend(minitorch.CudaOps)
+
+# Check if CUDA is available for GPU backend
+try:
+    import numba
+
+    if numba.cuda.is_available():
+        GPUBackend = minitorch.TensorBackend(minitorch.CudaOps)
+    else:
+        GPUBackend = None
+except ImportError:
+    GPUBackend = None
 
 
 def default_log_fn(epoch, total_loss, correct, losses, epoch_time):
@@ -104,6 +113,39 @@ class FastTrain:
                 log_fn(epoch, total_loss, correct, losses, epoch_time)
 
 
+def visualize_dataset(data):
+    # Count class occurrences
+    class_counts = {0: 0, 1: 0}
+    for label in data.y:
+        class_counts[int(label)] += 1
+
+    # Bar chart for class distribution
+    plt.figure(figsize=(8, 4))
+    plt.bar(
+        ["Class 0", "Class 1"],
+        [class_counts[0], class_counts[1]],
+        color=["skyblue", "salmon"],
+    )
+    plt.title("Dataset Class Distribution")
+    plt.ylabel("Number of Points")
+    plt.xlabel("Classes")
+    plt.grid(axis="y", linestyle="--", alpha=0.7)
+    plt.show()
+
+    # Scatter plot for dataset points (if 2D points)
+    if data.X.shape[1] == 2:  # Only applicable for 2D datasets
+        plt.figure(figsize=(8, 8))
+        colors = ["blue" if label == 0 else "red" for label in data.y]
+        plt.scatter([x[0] for x in data.X], [x[1] for x in data.X], c=colors, alpha=0.7)
+        plt.title("Dataset Point Distribution")
+        plt.xlabel("Feature 1")
+        plt.ylabel("Feature 2")
+        plt.axhline(0, color="black", linewidth=0.8, linestyle="--")
+        plt.axvline(0, color="black", linewidth=0.8, linestyle="--")
+        plt.grid(alpha=0.5)
+        plt.show()
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -125,6 +167,9 @@ if __name__ == "__main__":
         data = minitorch.datasets["Simple"](PTS)
     elif args.DATASET == "split":
         data = minitorch.datasets["Split"](PTS)
+
+    # Visualize the dataset
+    visualize_dataset(data)
 
     HIDDEN = int(args.HIDDEN)
     RATE = args.RATE
