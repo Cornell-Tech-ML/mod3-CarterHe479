@@ -409,7 +409,7 @@ No allocation hoisting found
 None
 
 Task 3.4
-![Running Time Comparision](Diag.png "Time")
+![Running Time Comparision](execution_times.png "Time")
 
 Timing summary
 Size: 64
