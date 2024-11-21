@@ -407,3 +407,245 @@ part of the larger parallel loop (#19).
 Allocation hoisting:
 No allocation hoisting found
 None
+
+Task 3.4
+![Running Time Comparision](Diag.png "Time")
+
+Timing summary
+Size: 64
+    fast: 0.00339
+    gpu: 0.00616
+Size: 128
+    fast: 0.01684
+    gpu: 0.01463
+Size: 256
+    fast: 0.09430
+    gpu: 0.05284
+Size: 512
+    fast: 0.96107
+    gpu: 0.22211
+Size: 1024
+    fast: 7.56337
+    gpu: 0.98321
+
+
+Task 3.5
+CPU
+
+Split
+Epoch 0, Loss: 7.4204, Correct: 33, Time: 24.64s
+Epoch 10, Loss: 5.7764, Correct: 37, Time: 0.37s
+Epoch 20, Loss: 3.6975, Correct: 41, Time: 0.39s
+Epoch 30, Loss: 2.4217, Correct: 42, Time: 0.58s
+Epoch 40, Loss: 3.8433, Correct: 44, Time: 0.38s
+Epoch 50, Loss: 2.5503, Correct: 46, Time: 0.37s
+Epoch 60, Loss: 1.5713, Correct: 50, Time: 0.52s
+Epoch 70, Loss: 1.8545, Correct: 50, Time: 0.37s
+Epoch 80, Loss: 1.0789, Correct: 50, Time: 0.41s
+Epoch 90, Loss: 1.5345, Correct: 50, Time: 0.38s
+Epoch 100, Loss: 1.1756, Correct: 50, Time: 0.37s
+Epoch 110, Loss: 0.4549, Correct: 50, Time: 0.37s
+Epoch 120, Loss: 0.6840, Correct: 50, Time: 0.38s
+Epoch 130, Loss: 1.1076, Correct: 50, Time: 0.38s
+Epoch 140, Loss: 0.0988, Correct: 50, Time: 0.37s
+Epoch 150, Loss: 1.0225, Correct: 50, Time: 0.37s
+Epoch 160, Loss: 0.7556, Correct: 50, Time: 0.37s
+Epoch 170, Loss: 0.2005, Correct: 50, Time: 0.38s
+Epoch 180, Loss: 0.1001, Correct: 50, Time: 0.37s
+Epoch 190, Loss: 0.6471, Correct: 50, Time: 0.37s
+Epoch 200, Loss: 0.1436, Correct: 50, Time: 0.37s
+Epoch 210, Loss: 0.4951, Correct: 50, Time: 0.38s
+Epoch 220, Loss: 0.1284, Correct: 50, Time: 0.38s
+Epoch 230, Loss: 0.2563, Correct: 50, Time: 0.52s
+Epoch 240, Loss: 0.2676, Correct: 50, Time: 0.37s
+Epoch 250, Loss: 0.2840, Correct: 50, Time: 0.37s
+Epoch 260, Loss: 0.2168, Correct: 50, Time: 0.54s
+Epoch 270, Loss: 0.3130, Correct: 50, Time: 0.38s
+Epoch 280, Loss: 0.2463, Correct: 50, Time: 0.37s
+Epoch 290, Loss: 0.1637, Correct: 50, Time: 0.58s
+Epoch 300, Loss: 0.2962, Correct: 50, Time: 0.38s
+Epoch 310, Loss: 0.3331, Correct: 50, Time: 0.37s
+Epoch 320, Loss: 0.2835, Correct: 50, Time: 0.61s
+Epoch 330, Loss: 0.0473, Correct: 50, Time: 0.38s
+Epoch 340, Loss: 0.0358, Correct: 50, Time: 0.37s
+Epoch 350, Loss: 0.0487, Correct: 50, Time: 0.71s
+Epoch 360, Loss: 0.0229, Correct: 50, Time: 0.37s
+Epoch 370, Loss: 0.0666, Correct: 50, Time: 0.38s
+Epoch 380, Loss: 0.1626, Correct: 50, Time: 0.73s
+Epoch 390, Loss: 0.1854, Correct: 50, Time: 0.37s
+Epoch 400, Loss: 0.0320, Correct: 50, Time: 0.38s
+Epoch 410, Loss: 0.0898, Correct: 50, Time: 0.72s
+Epoch 420, Loss: 0.2190, Correct: 50, Time: 0.37s
+Epoch 430, Loss: 0.1039, Correct: 50, Time: 0.37s
+Epoch 440, Loss: 0.1324, Correct: 50, Time: 0.71s
+Epoch 450, Loss: 0.1795, Correct: 50, Time: 0.38s
+Epoch 460, Loss: 0.0942, Correct: 50, Time: 0.37s
+Epoch 470, Loss: 0.1103, Correct: 50, Time: 0.74s
+Epoch 480, Loss: 0.1399, Correct: 50, Time: 0.37s
+Epoch 490, Loss: 0.1922, Correct: 50, Time: 0.38s
+Epoch 499, Loss: 0.0900, Correct: 50, Time: 0.75s
+
+Xor:
+Epoch 0, Loss: 6.5172, Correct: 36, Time: 24.58s
+Epoch 10, Loss: 4.2571, Correct: 41, Time: 0.74s
+Epoch 20, Loss: 2.5587, Correct: 44, Time: 0.38s
+Epoch 30, Loss: 2.5948, Correct: 46, Time: 0.37s
+Epoch 40, Loss: 1.9630, Correct: 47, Time: 0.75s
+Epoch 50, Loss: 3.3847, Correct: 45, Time: 0.37s
+Epoch 60, Loss: 3.5610, Correct: 46, Time: 0.39s
+Epoch 70, Loss: 2.5628, Correct: 47, Time: 0.66s
+Epoch 80, Loss: 3.3169, Correct: 47, Time: 0.37s
+Epoch 90, Loss: 1.2531, Correct: 48, Time: 0.36s
+Epoch 100, Loss: 0.7897, Correct: 48, Time: 0.74s
+Epoch 110, Loss: 1.8216, Correct: 47, Time: 0.38s
+Epoch 120, Loss: 0.9277, Correct: 48, Time: 0.37s
+Epoch 130, Loss: 1.2520, Correct: 48, Time: 0.73s
+Epoch 140, Loss: 3.1696, Correct: 48, Time: 0.37s
+Epoch 150, Loss: 1.1266, Correct: 48, Time: 0.40s
+Epoch 160, Loss: 0.8359, Correct: 48, Time: 0.74s
+Epoch 170, Loss: 0.7998, Correct: 48, Time: 0.37s
+Epoch 180, Loss: 0.4587, Correct: 49, Time: 0.37s
+Epoch 190, Loss: 1.3786, Correct: 49, Time: 0.58s
+Epoch 200, Loss: 1.0490, Correct: 49, Time: 0.39s
+Epoch 210, Loss: 1.2370, Correct: 50, Time: 0.38s
+Epoch 220, Loss: 0.3685, Correct: 49, Time: 0.38s
+Epoch 230, Loss: 0.3696, Correct: 50, Time: 0.37s
+Epoch 240, Loss: 0.3391, Correct: 50, Time: 0.37s
+Epoch 250, Loss: 0.8803, Correct: 50, Time: 0.38s
+Epoch 260, Loss: 1.2422, Correct: 50, Time: 0.40s
+Epoch 270, Loss: 0.8153, Correct: 50, Time: 0.37s
+Epoch 280, Loss: 0.3703, Correct: 50, Time: 0.38s
+Epoch 290, Loss: 0.3946, Correct: 50, Time: 0.38s
+Epoch 300, Loss: 0.4309, Correct: 50, Time: 0.40s
+Epoch 310, Loss: 0.2985, Correct: 50, Time: 0.39s
+Epoch 320, Loss: 0.4586, Correct: 50, Time: 0.37s
+Epoch 330, Loss: 0.2041, Correct: 50, Time: 0.37s
+Epoch 340, Loss: 0.4546, Correct: 50, Time: 0.37s
+Epoch 350, Loss: 0.2444, Correct: 50, Time: 0.38s
+Epoch 360, Loss: 0.8826, Correct: 50, Time: 0.40s
+Epoch 370, Loss: 0.3329, Correct: 50, Time: 0.37s
+Epoch 380, Loss: 0.0475, Correct: 50, Time: 0.38s
+Epoch 390, Loss: 0.2202, Correct: 50, Time: 0.39s
+Epoch 400, Loss: 0.4303, Correct: 50, Time: 0.37s
+Epoch 410, Loss: 0.0366, Correct: 50, Time: 0.37s
+Epoch 420, Loss: 0.3062, Correct: 50, Time: 0.38s
+Epoch 430, Loss: 0.0511, Correct: 50, Time: 0.38s
+Epoch 440, Loss: 0.2319, Correct: 50, Time: 0.36s
+Epoch 450, Loss: 0.4526, Correct: 50, Time: 0.37s
+Epoch 460, Loss: 0.1789, Correct: 50, Time: 0.38s
+Epoch 470, Loss: 0.2619, Correct: 50, Time: 0.37s
+Epoch 480, Loss: 0.1506, Correct: 50, Time: 0.37s
+Epoch 490, Loss: 0.1690, Correct: 50, Time: 0.37s
+Epoch 499, Loss: 0.1686, Correct: 50, Time: 0.37s
+
+
+
+GPU
+split
+Epoch  0  loss  5.999729209980775 correct 29
+Epoch  10  loss  5.782130108719306 correct 42
+Epoch  20  loss  5.41722229556523 correct 46
+Epoch  30  loss  3.9254823110920944 correct 48
+Epoch  40  loss  3.127109629704878 correct 45
+Epoch  50  loss  2.6668823223093066 correct 50
+Epoch  60  loss  2.094813888735321 correct 46
+Epoch  70  loss  1.6158934123193744 correct 49
+Epoch  80  loss  1.0109394035329071 correct 50
+Epoch  90  loss  1.3857233176522372 correct 50
+Epoch  100  loss  1.8350473355061394 correct 50
+Epoch  110  loss  1.3235882282490525 correct 50
+Epoch  120  loss  1.753383200051414 correct 49
+Epoch  130  loss  1.3643978989798564 correct 50
+Epoch  140  loss  1.0485288646461095 correct 50
+Epoch  150  loss  0.5185142098469127 correct 48
+Epoch  160  loss  0.3973225595975532 correct 50
+Epoch  170  loss  0.49889340771742663 correct 50
+Epoch  180  loss  1.1807946448477071 correct 50
+Epoch  190  loss  0.2469028561185415 correct 50
+Epoch  200  loss  1.1782215180266262 correct 50
+Epoch  210  loss  0.6306356434999648 correct 50
+Epoch  220  loss  1.174198346401089 correct 50
+Epoch  230  loss  0.478647242285111 correct 50
+Epoch  240  loss  1.1976518944805408 correct 49
+Epoch  250  loss  0.334429701814123 correct 49
+Epoch  260  loss  0.6516312714393142 correct 50
+Epoch  270  loss  0.22801354223269682 correct 50
+Epoch  280  loss  0.21073530177652633 correct 50
+Epoch  290  loss  0.16205810383975705 correct 49
+Epoch  300  loss  0.2142267841599168 correct 50
+Epoch  310  loss  0.16968398385624744 correct 49
+Epoch  320  loss  0.9719456474249273 correct 49
+Epoch  330  loss  0.9476078318508812 correct 50
+Epoch  340  loss  0.16597071981282832 correct 50
+Epoch  350  loss  0.07202878967860413 correct 49
+Epoch  360  loss  0.6217805665110121 correct 50
+Epoch  370  loss  0.38038870402737945 correct 50
+Epoch  380  loss  0.2003657147108834 correct 49
+Epoch  390  loss  0.3680577028208729 correct 50
+Epoch  400  loss  0.2967743604492466 correct 50
+Epoch  410  loss  0.21734941775577998 correct 50
+Epoch  420  loss  0.03248789137509381 correct 50
+Epoch  430  loss  0.435082575236071 correct 50
+Epoch  440  loss  0.03526106291120199 correct 50
+Epoch  450  loss  0.02850123171553321 correct 50
+Epoch  460  loss  1.4783234944975046 correct 50
+Epoch  470  loss  0.25532012423556866 correct 50
+Epoch  480  loss  0.3847868573099726 correct 50
+Epoch  490  loss  0.04860468067218111 correct 50
+Epoch  499  loss  0.03867456381973816 correct 50
+
+
+Xor
+Epoch 0, Loss: 11.4968, Correct: 24, Time: 5.23s
+Epoch 10, Loss: 5.7142, Correct: 40, Time: 2.05s
+Epoch 20, Loss: 3.8728, Correct: 44, Time: 2.02s
+Epoch 30, Loss: 3.0539, Correct: 45, Time: 2.06s
+Epoch 40, Loss: 3.7693, Correct: 45, Time: 2.26s
+Epoch 50, Loss: 3.0486, Correct: 44, Time: 2.42s
+Epoch 60, Loss: 2.3849, Correct: 45, Time: 2.04s
+Epoch 70, Loss: 1.9903, Correct: 46, Time: 2.05s
+Epoch 80, Loss: 0.9979, Correct: 47, Time: 1.98s
+Epoch 90, Loss: 2.7519, Correct: 46, Time: 2.60s
+Epoch 100, Loss: 3.3186, Correct: 46, Time: 2.00s
+Epoch 110, Loss: 3.7084, Correct: 49, Time: 1.99s
+Epoch 120, Loss: 1.4837, Correct: 48, Time: 2.03s
+Epoch 130, Loss: 1.8670, Correct: 49, Time: 2.36s
+Epoch 140, Loss: 1.2499, Correct: 48, Time: 2.06s
+Epoch 150, Loss: 1.8027, Correct: 50, Time: 2.02s
+Epoch 160, Loss: 0.5937, Correct: 50, Time: 2.03s
+Epoch 170, Loss: 1.4146, Correct: 49, Time: 2.14s
+Epoch 180, Loss: 1.6894, Correct: 48, Time: 2.63s
+Epoch 190, Loss: 1.1400, Correct: 49, Time: 1.98s
+Epoch 200, Loss: 2.2546, Correct: 48, Time: 1.99s
+Epoch 210, Loss: 0.2185, Correct: 50, Time: 2.03s
+Epoch 220, Loss: 1.2056, Correct: 49, Time: 2.77s
+Epoch 230, Loss: 0.9986, Correct: 50, Time: 2.04s
+Epoch 240, Loss: 0.9657, Correct: 49, Time: 2.01s
+Epoch 250, Loss: 1.2605, Correct: 49, Time: 2.05s
+Epoch 260, Loss: 0.5758, Correct: 50, Time: 2.77s
+Epoch 270, Loss: 1.0515, Correct: 50, Time: 2.07s
+Epoch 280, Loss: 0.1066, Correct: 50, Time: 2.06s
+Epoch 290, Loss: 1.2530, Correct: 50, Time: 2.05s
+Epoch 300, Loss: 0.2812, Correct: 49, Time: 2.11s
+Epoch 310, Loss: 0.7326, Correct: 48, Time: 2.32s
+Epoch 320, Loss: 1.7905, Correct: 49, Time: 1.99s
+Epoch 330, Loss: 1.1109, Correct: 49, Time: 2.05s
+Epoch 340, Loss: 0.8214, Correct: 49, Time: 1.98s
+Epoch 350, Loss: 1.3067, Correct: 49, Time: 2.60s
+Epoch 360, Loss: 0.1312, Correct: 50, Time: 1.98s
+Epoch 370, Loss: 1.0847, Correct: 49, Time: 2.01s
+Epoch 380, Loss: 1.5840, Correct: 49, Time: 2.00s
+Epoch 390, Loss: 0.8136, Correct: 49, Time: 2.80s
+Epoch 400, Loss: 0.8513, Correct: 50, Time: 2.00s
+Epoch 410, Loss: 1.6644, Correct: 48, Time: 2.00s
+Epoch 420, Loss: 0.1055, Correct: 48, Time: 2.02s
+Epoch 430, Loss: 0.2599, Correct: 49, Time: 2.22s
+Epoch 440, Loss: 0.1544, Correct: 50, Time: 2.21s
+Epoch 450, Loss: 0.5149, Correct: 50, Time: 1.99s
+Epoch 460, Loss: 0.1528, Correct: 49, Time: 2.00s
+Epoch 470, Loss: 1.0558, Correct: 50, Time: 2.00s
+Epoch 480, Loss: 0.9335, Correct: 49, Time: 2.33s
+Epoch 490, Loss: 0.4461, Correct: 49, Time: 1.99s
+Epoch 499, Loss: 0.9398, Correct: 49, Time: 2.00s
+
+
