@@ -432,6 +432,59 @@ Size: 1024
 Task 3.5
 CPU
 
+Simple
+Epoch 0, Loss: 5.8638, Correct: 46, Time: 24.92s
+Epoch 10, Loss: 2.3847, Correct: 47, Time: 0.69s
+Epoch 20, Loss: 0.8455, Correct: 50, Time: 0.36s
+Epoch 30, Loss: 0.7482, Correct: 48, Time: 0.38s
+Epoch 40, Loss: 0.4483, Correct: 49, Time: 0.64s
+Epoch 50, Loss: 0.1625, Correct: 48, Time: 0.37s
+Epoch 60, Loss: 0.7690, Correct: 49, Time: 0.37s
+Epoch 70, Loss: 0.8967, Correct: 49, Time: 0.41s
+Epoch 80, Loss: 0.8729, Correct: 50, Time: 0.38s
+Epoch 90, Loss: 0.1878, Correct: 49, Time: 0.38s
+Epoch 100, Loss: 0.2443, Correct: 49, Time: 0.37s
+Epoch 110, Loss: 0.2508, Correct: 49, Time: 0.38s
+Epoch 120, Loss: 0.2729, Correct: 49, Time: 0.39s
+Epoch 130, Loss: 0.5982, Correct: 49, Time: 0.37s
+Epoch 140, Loss: 0.5800, Correct: 50, Time: 0.37s
+Epoch 150, Loss: 0.2049, Correct: 49, Time: 0.38s
+Epoch 160, Loss: 0.1642, Correct: 49, Time: 0.38s
+Epoch 170, Loss: 0.1712, Correct: 49, Time: 0.37s
+Epoch 180, Loss: 0.0458, Correct: 50, Time: 0.37s
+Epoch 190, Loss: 0.4554, Correct: 50, Time: 0.37s
+Epoch 200, Loss: 0.8197, Correct: 49, Time: 0.37s
+Epoch 210, Loss: 0.9572, Correct: 49, Time: 0.37s
+Epoch 220, Loss: 0.1493, Correct: 50, Time: 0.39s
+Epoch 230, Loss: 0.1421, Correct: 50, Time: 0.38s
+Epoch 240, Loss: 0.1210, Correct: 50, Time: 0.37s
+Epoch 250, Loss: 0.1510, Correct: 50, Time: 0.37s
+Epoch 260, Loss: 0.0488, Correct: 49, Time: 0.39s
+Epoch 270, Loss: 2.0065, Correct: 49, Time: 0.38s
+Epoch 280, Loss: 0.6540, Correct: 49, Time: 0.37s
+Epoch 290, Loss: 0.0420, Correct: 49, Time: 0.38s
+Epoch 300, Loss: 0.5502, Correct: 50, Time: 0.39s
+Epoch 310, Loss: 0.0010, Correct: 50, Time: 0.38s
+Epoch 320, Loss: 1.0798, Correct: 50, Time: 0.36s
+Epoch 330, Loss: 0.8974, Correct: 50, Time: 0.37s
+Epoch 340, Loss: 0.0568, Correct: 49, Time: 0.38s
+Epoch 350, Loss: 0.0291, Correct: 49, Time: 0.38s
+Epoch 360, Loss: 1.1826, Correct: 49, Time: 0.37s
+Epoch 370, Loss: 0.3610, Correct: 49, Time: 0.37s
+Epoch 380, Loss: 0.1373, Correct: 49, Time: 0.38s
+Epoch 390, Loss: 0.0006, Correct: 50, Time: 0.38s
+Epoch 400, Loss: 0.8618, Correct: 50, Time: 0.37s
+Epoch 410, Loss: 0.0586, Correct: 50, Time: 0.37s
+Epoch 420, Loss: 0.1829, Correct: 50, Time: 0.38s
+Epoch 430, Loss: 0.0066, Correct: 49, Time: 0.37s
+Epoch 440, Loss: 0.0931, Correct: 49, Time: 0.37s
+Epoch 450, Loss: 0.1997, Correct: 50, Time: 0.37s
+Epoch 460, Loss: 0.0620, Correct: 50, Time: 0.38s
+Epoch 470, Loss: 0.0058, Correct: 49, Time: 0.37s
+Epoch 480, Loss: 0.8148, Correct: 49, Time: 0.41s
+Epoch 490, Loss: 0.0917, Correct: 50, Time: 0.37s
+Epoch 499, Loss: 0.0242, Correct: 49, Time: 0.37s
+
 Split
 Epoch 0, Loss: 7.4204, Correct: 33, Time: 24.64s
 Epoch 10, Loss: 5.7764, Correct: 37, Time: 0.37s
@@ -541,7 +594,61 @@ Epoch 499, Loss: 0.1686, Correct: 50, Time: 0.37s
 
 
 GPU
-split
+
+Simple
+Epoch 0, Loss: 5.3714, Correct: 41, Time: 4.37s
+Epoch 10, Loss: 1.5155, Correct: 47, Time: 2.09s
+Epoch 20, Loss: 0.7379, Correct: 48, Time: 2.02s
+Epoch 30, Loss: 0.6059, Correct: 50, Time: 2.15s
+Epoch 40, Loss: 1.0720, Correct: 50, Time: 2.67s
+Epoch 50, Loss: 0.9639, Correct: 50, Time: 2.07s
+Epoch 60, Loss: 0.2203, Correct: 50, Time: 2.02s
+Epoch 70, Loss: 0.5854, Correct: 50, Time: 2.02s
+Epoch 80, Loss: 0.4281, Correct: 50, Time: 2.70s
+Epoch 90, Loss: 0.4036, Correct: 50, Time: 2.04s
+Epoch 100, Loss: 0.4493, Correct: 50, Time: 2.01s
+Epoch 110, Loss: 0.1604, Correct: 50, Time: 2.01s
+Epoch 120, Loss: 0.0127, Correct: 50, Time: 2.01s
+Epoch 130, Loss: 0.1382, Correct: 50, Time: 2.61s
+Epoch 140, Loss: 0.0388, Correct: 50, Time: 2.19s
+Epoch 150, Loss: 0.1147, Correct: 50, Time: 2.04s
+Epoch 160, Loss: 0.1625, Correct: 50, Time: 2.06s
+Epoch 170, Loss: 0.3175, Correct: 50, Time: 2.11s
+Epoch 180, Loss: 0.0690, Correct: 50, Time: 2.53s
+Epoch 190, Loss: 0.0050, Correct: 50, Time: 2.03s
+Epoch 200, Loss: 0.0213, Correct: 50, Time: 2.02s
+Epoch 210, Loss: 0.0197, Correct: 50, Time: 2.02s
+Epoch 220, Loss: 0.2042, Correct: 50, Time: 2.20s
+Epoch 230, Loss: 0.1559, Correct: 50, Time: 2.39s
+Epoch 240, Loss: 0.2732, Correct: 50, Time: 2.02s
+Epoch 250, Loss: 0.2163, Correct: 50, Time: 2.08s
+Epoch 260, Loss: 0.0593, Correct: 50, Time: 2.10s
+Epoch 270, Loss: 0.0034, Correct: 50, Time: 2.72s
+Epoch 280, Loss: 0.0032, Correct: 50, Time: 2.08s
+Epoch 290, Loss: 0.0491, Correct: 50, Time: 2.11s
+Epoch 300, Loss: 0.3013, Correct: 50, Time: 2.10s
+Epoch 310, Loss: 0.0360, Correct: 50, Time: 2.03s
+Epoch 320, Loss: 0.0868, Correct: 50, Time: 2.84s
+Epoch 330, Loss: 0.1134, Correct: 50, Time: 2.02s
+Epoch 340, Loss: 0.0072, Correct: 50, Time: 2.02s
+Epoch 350, Loss: 0.1076, Correct: 50, Time: 2.26s
+Epoch 360, Loss: 0.0853, Correct: 50, Time: 2.10s
+Epoch 370, Loss: 0.1493, Correct: 50, Time: 2.45s
+Epoch 380, Loss: 0.0005, Correct: 50, Time: 2.02s
+Epoch 390, Loss: 0.0533, Correct: 50, Time: 2.02s
+Epoch 400, Loss: 0.0167, Correct: 50, Time: 2.02s
+Epoch 410, Loss: 0.1262, Correct: 50, Time: 2.83s
+Epoch 420, Loss: 0.0011, Correct: 50, Time: 2.03s
+Epoch 430, Loss: 0.0465, Correct: 50, Time: 2.02s
+Epoch 440, Loss: 0.0420, Correct: 50, Time: 2.07s
+Epoch 450, Loss: 0.0225, Correct: 50, Time: 2.02s
+Epoch 460, Loss: 0.0145, Correct: 50, Time: 2.62s
+Epoch 470, Loss: 0.0146, Correct: 50, Time: 2.03s
+Epoch 480, Loss: 0.0028, Correct: 50, Time: 2.04s
+Epoch 490, Loss: 0.0648, Correct: 50, Time: 2.02s
+Epoch 499, Loss: 0.1322, Correct: 50, Time: 2.34s
+
+Split
 Epoch  0  loss  5.999729209980775 correct 29
 Epoch  10  loss  5.782130108719306 correct 42
 Epoch  20  loss  5.41722229556523 correct 46
