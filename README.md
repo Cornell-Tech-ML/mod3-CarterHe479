@@ -410,11 +410,11 @@ None
 
 
 Task3.3
-![Colab Task 3.3 Result](Task 3.3.png)
+![Colab Task 3.3 Result](Task3.3.png)
 
 
 Task 3.4
-![Colab Task3.4 Result](Task3.4.png)
+![Colab Task 3.4 Result](Task3.4.png)
 
 ![Running Time Comparision](execution_times.png "Time")
 
