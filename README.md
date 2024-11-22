@@ -408,7 +408,14 @@ Allocation hoisting:
 No allocation hoisting found
 None
 
+
+Task3.3
+![Colab Task3.3 Result](Task 3.3.png)
+
+
 Task 3.4
+![Colab Task3.4 Result](Task3.4.png)
+
 ![Running Time Comparision](execution_times.png "Time")
 
 Timing summary
