@@ -385,9 +385,13 @@ def _mm_practice(out: Storage, a: Storage, b: Storage, size: int) -> None:
     a_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
     b_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
 
+    # Thread indices
+    tx = cuda.threadIdx.x
+    ty = cuda.threadIdx.y
+
     # Identify the row index (i) and column index (j) for the current thread in the grid.
-    i = cuda.blockIdx.x
-    j = cuda.blockIdx.y
+    i = cuda.blockIdx.x * BLOCK_DIM + tx
+    j = cuda.blockIdx.y * BLOCK_DIM + ty
 
     # If the indices exceed the matrix size, exit early (bounds check).
     if i >= size or j >= size:
@@ -517,7 +521,8 @@ def _tensor_matrix_multiply(
                 2
             ]:  # Ensure we don't access beyond the shared dimension.
                 accum += a_shared[pi, k] * b_shared[k, pj]  # Accumulate the product.
-        # Synchronize again before next iteration
+
+        # Synchronize all threads to ensure all threads have completed the computation.
         cuda.syncthreads()
 
     # Write the final accumulated value to the global memory output matrix, if within bounds.
