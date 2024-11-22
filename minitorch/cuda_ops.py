@@ -496,21 +496,22 @@ def _tensor_matrix_multiply(
     for idx in range(
         0, a_shape[2], BLOCK_DIM
     ):  # Iterate through chunks of the shared dimension.
-        # Calculate the index `k` in the shared dimension for matrix `a`.
-        k = idx + pj
-        if i < a_shape[1] and k < a_shape[2]:  # Ensure within bounds.
-            # Load a block of `a` into shared memory.
-            a_shared[pi, pj] = a_storage[
-                a_batch_stride * batch + a_strides[1] * i + a_strides[2] * k
-            ]
 
-        # Calculate the index `k` in the shared dimension for matrix `b`.
-        k = idx + pi
-        if j < b_shape[2] and k < b_shape[1]:  # Ensure within bounds.
-            # Load a block of `b` into shared memory.
-            b_shared[pi, pj] = b_storage[
-                b_batch_stride * batch + b_strides[1] * k + b_strides[2] * j
+        # Load a block of `a` into shared memory.
+        if i < a_shape[1] and (idx + pj) < a_shape[2]:  # Ensure within bounds for `a`.
+            a_shared[pi, pj] = a_storage[
+                a_batch_stride * batch + a_strides[1] * i + a_strides[2] * (idx + pj)
             ]
+        else:
+            a_shared[pi, pj] = 0.0  # Pad out-of-bounds values with 0.
+
+        # Load a block of `b` into shared memory.
+        if j < b_shape[2] and (idx + pi) < b_shape[1]:  # Ensure within bounds for `b`.
+            b_shared[pi, pj] = b_storage[
+                b_batch_stride * batch + b_strides[1] * (idx + pi) + b_strides[2] * j
+            ]
+        else:
+            b_shared[pi, pj] = 0.0  # Pad out-of-bounds values with 0.
 
         # Synchronize all threads to ensure shared memory is fully populated before computation.
         cuda.syncthreads()
@@ -526,8 +527,8 @@ def _tensor_matrix_multiply(
         cuda.syncthreads()
 
     # Write the final accumulated value to the global memory output matrix, if within bounds.
-    if i < out_shape[1] and j < out_shape[2]:
-        out[a_strides[0] * batch + out_strides[1] * i + out_strides[2] * j] = (
+    if batch < out_shape[0] and i < out_shape[1] and j < out_shape[2]:  # Adjusted to ensure `batch` respects bounds.
+        out[out_strides[0] * batch + out_strides[1] * i + out_strides[2] * j] = (
             accum  # Store the computed value in `out`.
         )
 
