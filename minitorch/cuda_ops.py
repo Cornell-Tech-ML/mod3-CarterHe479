@@ -379,26 +379,37 @@ def _mm_practice(out: Storage, a: Storage, b: Storage, size: int) -> None:
         size (int): size of the square
 
     """
-    BLOCK_DIM = 32
-    # TODO: Implement for Task 3.3.
+    BLOCK_DIM = 32  # Define the maximum block dimension size for shared memory.
+
+    # Allocate shared memory arrays for storing chunks of matrices `a` and `b`.
     a_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
     b_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
 
+    # Identify the row index (i) and column index (j) for the current thread in the grid.
     i = cuda.blockIdx.x
     j = cuda.blockIdx.y
 
+    # If the indices exceed the matrix size, exit early (bounds check).
     if i >= size or j >= size:
         return
 
+    # Load the current element of matrix `a` into shared memory for this thread.
     a_shared[i, j] = a[i * size + j]
+
+    # Load the current element of matrix `b` into shared memory for this thread.
     b_shared[i, j] = b[i * size + j]
+
+    # Synchronize all threads in the block to ensure shared memory is fully populated.
     cuda.syncthreads()
 
+    # Initialize an accumulator variable for the dot product of the row and column.
     accum = 0.0
 
-    for k in range(size):
-        accum += a_shared[i, k] * b_shared[k, j]
+    # Perform the dot product of row `i` of `a` with column `j` of `b`.
+    for k in range(size):  # Iterate over the shared dimension.
+        accum += a_shared[i, k] * b_shared[k, j]  # Multiply and accumulate the result.
 
+    # Write the computed result to the global memory location in the output matrix.
     out[i * size + j] = accum
 
 
@@ -445,20 +456,26 @@ def _tensor_matrix_multiply(
     Returns:
         None : Fills in `out`
     """
+    # Calculate the batch stride for tensor `a` based on whether batching is required.
     a_batch_stride = a_strides[0] if a_shape[0] > 1 else 0
+    # Calculate the batch stride for tensor `b` similarly.
     b_batch_stride = b_strides[0] if b_shape[0] > 1 else 0
-    # Batch dimension - fixed
+
+    # Determine the batch index for the current thread based on the z-dimension of the block.
     batch = cuda.blockIdx.z
 
+    # Define the block size for shared memory.
     BLOCK_DIM = 32
+
+    # Allocate shared memory for chunks of tensor `a` and tensor `b` being processed.
     a_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
     b_shared = cuda.shared.array((BLOCK_DIM, BLOCK_DIM), numba.float64)
 
-    # The final position c[i, j]
-    i = cuda.blockIdx.x * cuda.blockDim.x + cuda.threadIdx.x
-    j = cuda.blockIdx.y * cuda.blockDim.y + cuda.threadIdx.y
+    # Calculate the global position (i, j) of the current thread in the output matrix.
+    i = cuda.blockIdx.x * cuda.blockDim.x + cuda.threadIdx.x  # Row index.
+    j = cuda.blockIdx.y * cuda.blockDim.y + cuda.threadIdx.y  # Column index.
 
-    # The local position in the block.
+    # Determine the thread's local position (pi, pj) within its block.
     pi = cuda.threadIdx.x
     pj = cuda.threadIdx.y
 
@@ -468,28 +485,41 @@ def _tensor_matrix_multiply(
     #    b) Copy into shared memory for b matrix
     #    c) Compute the dot produce for position c[i, j]
     # TODO: Implement for Task 3.4.
+    # Initialize an accumulator for the dot product calculation.
     accum = 0.0
 
-    for idx in range(0, a_shape[2], BLOCK_DIM):
+    # Loop over the shared dimension of matrices `a` and `b` in blocks of size `BLOCK_DIM`.
+    for idx in range(0, a_shape[2], BLOCK_DIM):  # Iterate through chunks of the shared dimension.
+        
+        # Calculate the index `k` in the shared dimension for matrix `a`.
         k = idx + pj
-        if i < a_shape[1] and k < a_shape[2]:
+        if i < a_shape[1] and k < a_shape[2]:  # Ensure within bounds.
+            # Load a block of `a` into shared memory.
             a_shared[pi, pj] = a_storage[
                 a_batch_stride * batch + a_strides[1] * i + a_strides[2] * k
             ]
-        k = idx + pi
 
-        if j < b_shape[2] and k < b_shape[1]:
+        # Calculate the index `k` in the shared dimension for matrix `b`.
+        k = idx + pi
+        if j < b_shape[2] and k < b_shape[1]:  # Ensure within bounds.
+            # Load a block of `b` into shared memory.
             b_shared[pi, pj] = b_storage[
                 b_batch_stride * batch + b_strides[1] * k + b_strides[2] * j
             ]
+
+        # Synchronize all threads to ensure shared memory is fully populated before computation.
         cuda.syncthreads()
 
-        for k in range(BLOCK_DIM):
-            if (idx + k) < a_shape[2]:
-                accum += a_shared[pi, k] * b_shared[k, pj]
+        # Compute the dot product of the row of `a` with the column of `b` for the current block.
+        for k in range(BLOCK_DIM):  # Iterate through elements within the shared block.
+            if (idx + k) < a_shape[2]:  # Ensure we don't access beyond the shared dimension.
+                accum += a_shared[pi, k] * b_shared[k, pj]  # Accumulate the product.
 
+    # Write the final accumulated value to the global memory output matrix, if within bounds.
     if i < out_shape[1] and j < out_shape[2]:
-        out[a_strides[0] * batch + out_strides[1] * i + out_strides[2] * j] = accum
+        out[
+            a_strides[0] * batch + out_strides[1] * i + out_strides[2] * j
+        ] = accum  # Store the computed value in `out`.
 
-
+# Decorate the function with `jit` for compilation and execution with CUDA.
 tensor_matrix_multiply = jit(_tensor_matrix_multiply)
