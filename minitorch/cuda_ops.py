@@ -489,8 +489,9 @@ def _tensor_matrix_multiply(
     accum = 0.0
 
     # Loop over the shared dimension of matrices `a` and `b` in blocks of size `BLOCK_DIM`.
-    for idx in range(0, a_shape[2], BLOCK_DIM):  # Iterate through chunks of the shared dimension.
-        
+    for idx in range(
+        0, a_shape[2], BLOCK_DIM
+    ):  # Iterate through chunks of the shared dimension.
         # Calculate the index `k` in the shared dimension for matrix `a`.
         k = idx + pj
         if i < a_shape[1] and k < a_shape[2]:  # Ensure within bounds.
@@ -512,14 +513,17 @@ def _tensor_matrix_multiply(
 
         # Compute the dot product of the row of `a` with the column of `b` for the current block.
         for k in range(BLOCK_DIM):  # Iterate through elements within the shared block.
-            if (idx + k) < a_shape[2]:  # Ensure we don't access beyond the shared dimension.
+            if (idx + k) < a_shape[
+                2
+            ]:  # Ensure we don't access beyond the shared dimension.
                 accum += a_shared[pi, k] * b_shared[k, pj]  # Accumulate the product.
 
     # Write the final accumulated value to the global memory output matrix, if within bounds.
     if i < out_shape[1] and j < out_shape[2]:
-        out[
-            a_strides[0] * batch + out_strides[1] * i + out_strides[2] * j
-        ] = accum  # Store the computed value in `out`.
+        out[a_strides[0] * batch + out_strides[1] * i + out_strides[2] * j] = (
+            accum  # Store the computed value in `out`.
+        )
+
 
 # Decorate the function with `jit` for compilation and execution with CUDA.
 tensor_matrix_multiply = jit(_tensor_matrix_multiply)
