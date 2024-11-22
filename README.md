@@ -410,7 +410,7 @@ None
 
 
 Task3.3
-![Colab Task3.3 Result](Task 3.3.png)
+![Colab Task 3.3 Result](Task 3.3.png)
 
 
 Task 3.4
