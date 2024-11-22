@@ -517,6 +517,8 @@ def _tensor_matrix_multiply(
                 2
             ]:  # Ensure we don't access beyond the shared dimension.
                 accum += a_shared[pi, k] * b_shared[k, pj]  # Accumulate the product.
+        # Synchronize again before next iteration
+        cuda.syncthreads()
 
     # Write the final accumulated value to the global memory output matrix, if within bounds.
     if i < out_shape[1] and j < out_shape[2]:
