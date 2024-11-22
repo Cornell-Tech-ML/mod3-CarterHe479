@@ -496,7 +496,6 @@ def _tensor_matrix_multiply(
     for idx in range(
         0, a_shape[2], BLOCK_DIM
     ):  # Iterate through chunks of the shared dimension.
-
         # Load a block of `a` into shared memory.
         if i < a_shape[1] and (idx + pj) < a_shape[2]:  # Ensure within bounds for `a`.
             a_shared[pi, pj] = a_storage[
@@ -527,7 +526,9 @@ def _tensor_matrix_multiply(
         cuda.syncthreads()
 
     # Write the final accumulated value to the global memory output matrix, if within bounds.
-    if batch < out_shape[0] and i < out_shape[1] and j < out_shape[2]:  # Adjusted to ensure `batch` respects bounds.
+    if (
+        batch < out_shape[0] and i < out_shape[1] and j < out_shape[2]
+    ):  # Adjusted to ensure `batch` respects bounds.
         out[out_strides[0] * batch + out_strides[1] * i + out_strides[2] * j] = (
             accum  # Store the computed value in `out`.
         )
